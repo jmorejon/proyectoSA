@@ -13,9 +13,9 @@ app.use(bodyParser.json());
 // MySql
 const connection = mysql.createConnection({
   host: 'localhost',
-  user: 'usuario',
-  password: '123',
-  database: 'usuarios'
+  user: 'moodledude',
+  password: 'free',
+  database: 'moodle'
 });
 
 
@@ -50,8 +50,26 @@ app.get('/jugadores/:id', (req, res) => {
       res.json(result[0]);
     } else {
       
-      req.status(404);
-      res.statusMessage("Usuario no encontrado");
+      res.status(404);
+ 
+
+    }
+  });
+});
+
+app.get('/listado', (req, res) => {
+  
+  const sql = `SELECT * FROM usuario`;
+  connection.query(sql, (error, result) => {
+    //if (error) throw error;
+    
+    if (!error) {
+      //result[0].administrador == 1?result[0].administrador=true:result[0].administrador=false;
+      res.json(result[0]);
+    } else {
+      
+      res.status(404);
+ 
 
     }
   });
